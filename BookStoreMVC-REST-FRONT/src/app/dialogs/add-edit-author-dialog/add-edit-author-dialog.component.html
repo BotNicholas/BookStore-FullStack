@@ -1,0 +1,84 @@
+<form class="dialog-content" #form="ngForm">
+  <h2 mat-dialog-title >{{heading}} author: </h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Firstname:</mat-label>
+      <input name="firstname" matInput [(ngModel)]="author.firstname" #firstname="ngModel" required>
+      @if(firstname.hasError("required") && firstname.touched){
+        <mat-error>Please specify author firstname!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Lastname:</mat-label>
+      <input name="lastname" matInput [(ngModel)]="author.lastname" #lastname="ngModel" required>
+      @if (lastname.hasError("required") && lastname.touched) {
+        <mat-error>Please specify author lastname!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Birth date:</mat-label>
+      <input name="birthDate" type="date" matInput required [(ngModel)]="author.birthDate" #birth="ngModel" adult>
+      @if (birth.hasError("required") && birth.touched) {
+        <mat-error>Please specify author birth date!</mat-error>
+      } @else if (birth.hasError("adult") && birth.touched) {
+        <mat-error>Author must be an adult</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Gender:</mat-label>
+      <mat-select [(ngModel)]="author.gender" name="gender">
+        <mat-option value="M">M</mat-option>
+        <mat-option value="F">F</mat-option>
+        <mat-option value="U">U</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+<!--    <mat-form-field>-->
+<!--      <mat-label>Gender:</mat-label>-->
+<!--      <select matNativeControl [(ngModel)]="author.gender" [ngModelOptions]="{standalone: true}">-->
+<!--    OR-->
+<!--      <select matNativeControl [(ngModel)]="author.gender"  name="gender">-->
+<!--        <option value="M">M</option>-->
+<!--        <option value="F">F</option>-->
+<!--        <option value="U">U</option>-->
+<!--      </select>-->
+<!--    </mat-form-field>-->
+<!--    <br>-->
+
+
+    <mat-form-field>
+      <mat-label>Contact details:</mat-label>
+      <textarea matInput cdkTextareaAutosize name="contactDetails" [(ngModel)]="author.contactDetails"></textarea>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Other details:</mat-label>
+      <textarea matInput cdkTextareaAutosize name="otherDetails" [(ngModel)]="author.otherDetails"></textarea>
+    </mat-form-field>
+    <br>
+
+    <mat-label>Select photo:</mat-label><br>
+    <input type="file" accept="image/*" name="photo" ngModel #photo="ngModel" (change)="onFileUploaded($event, photo)">
+    @if(photo.touched && photo.hasError("fileSize")){
+      <mat-error>File size must not be more than {{maxFileUploadSize}} Bytes. <br>Current file size: {{uploadedFileSize}} Bytes</mat-error>
+    }
+
+<!--    <mat-form-field>-->
+<!--      <mat-label>Select photo:</mat-label>-->
+
+<!--    </mat-form-field>-->
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button [disabled]="!form.valid" (click)="save()">{{heading}}</button>
+  </mat-dialog-actions>
+</form>
+

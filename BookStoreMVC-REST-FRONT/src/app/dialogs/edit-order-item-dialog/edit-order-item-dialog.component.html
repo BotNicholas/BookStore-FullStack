@@ -1,0 +1,56 @@
+<form class="dialog-content" #form="ngForm">
+  <h2 mat-dialog-title>Edit order item: </h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Book:</mat-label>
+      <mat-select name="book" [(ngModel)]="orderItem.book" [compareWith]="compareBooks" required #book="ngModel">
+        @for(book of allBooks; track $index) {
+          <mat-option [value]="book">
+            <div class="select-option-with-icon">
+              <img class="select-book-icon" [src]="url+booksImagesPath+book.image">
+              <h4>{{book.title}}</h4>
+            </div>
+          </mat-option>
+        }
+      </mat-select>
+      @if(book.hasError("required") && book.touched) {
+        <mat-error>Please select the book!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Price:</mat-label>
+      <input type="number" matInput name="prce" required min="1" [(ngModel)]="orderItem.itemAgreedPrice" #price="ngModel">
+      @if (price.hasError("required") && price.touched) {
+        <mat-error>Please specify price!</mat-error>
+      } @else if (price.hasError("min") && price.touched) {
+        <mat-error>Minimal price allowed is 1</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Comment:</mat-label>
+      <textarea matInput cdkTextareaAutosize name="comment" [(ngModel)]="orderItem.itemComment"></textarea>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Amount: </mat-label>
+      <input type="number" matInput name="amount" required min="1" [notMoreThan]="orderItemAmount" [(ngModel)]="orderItem.amount" #amount="ngModel">
+      @if(amount.hasError("required") && amount.touched) {
+        <mat-error>Please specify amount!</mat-error>
+      } @else if (amount.hasError("min") && amount.touched) {
+        <mat-error>Minimal allowed amount is 1!</mat-error>
+      } @else if (amount.hasError("notMoreThan") && amount.touched) {
+        <mat-error>You can only decrease the amount!</mat-error>
+      }
+    </mat-form-field>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button [disabled]="form.invalid" (click)="save()">Edit</button>
+  </mat-dialog-actions>
+</form>

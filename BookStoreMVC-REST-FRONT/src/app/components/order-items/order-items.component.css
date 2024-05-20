@@ -1,0 +1,16 @@
+table{
+  width: 100%;
+  margin: 0;
+}
+
+table td {
+  border-radius: 0 !important;
+}
+
+tr:nth-last-child(1) td:nth-child(1) {
+  border-bottom-left-radius: 10px !important;
+}
+
+tr:nth-last-child(1) td:nth-last-child(1) {
+  border-bottom-right-radius: 10px !important;
+}

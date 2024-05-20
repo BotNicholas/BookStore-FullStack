@@ -1,0 +1,46 @@
+<div class="content">
+  <h1>Available authors:</h1>
+  <button class="add-button" (click)="addAuthor()">Add author</button>
+  <dialog #addDialog>
+    AAA
+  </dialog>
+  <table >
+    <tr>
+<!--      <th>Id</th>-->
+      <th>Image</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Initials</th>
+      <th>Birthdate</th>
+      <th>Gender</th>
+      <th>Contact details</th>
+      <th>Other details</th>
+      <th>Books</th>
+      <th colspan="2">Edit</th>
+    </tr>
+
+
+    @for(author of authors; track $index) {
+      <tr>
+<!--        <td>{{author.id}}</td>-->
+        <td><a [routerLink]="'/authors/'+author.id"><img class="table-icon" [src]="url+authorsImagesPath+author.image" [alt]="author.image"></a></td>
+        <td><a [routerLink]="'/authors/'+author.id">{{author.firstname}}</a></td>
+        <td><a [routerLink]="'/authors/'+author.id">{{author.lastname}}</a></td>
+        <td>{{author.initials}}</td>
+        <td>{{author.birthDate}}</td>
+        <td>{{author.gender}}</td>
+        <td>{{author.contactDetails}}</td>
+        <td>{{author.otherDetails}}</td>
+        <td>@if(author.books.length > 0){
+          <a routerLink="/books" [queryParams]="{filter: 'author-'+author.id}">see books...</a>
+        } @else {
+          empty : (
+        }</td>
+        <td class="action-cell edit-table-button"><button (click)="editAuthor(author)">Edit!</button></td>
+        <td class="action-cell delete-table-button"><button (click)="deleteAuthor(author)">Delete!</button></td>
+      </tr>
+    }
+  </table>
+</div>
+
+

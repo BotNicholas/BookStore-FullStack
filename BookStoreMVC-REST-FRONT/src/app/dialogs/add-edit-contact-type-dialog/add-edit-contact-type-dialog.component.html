@@ -1,0 +1,16 @@
+<form class="dialog-content" #form=ngForm>
+  <h2 mat-dialog-title>{{heading}} contact type:</h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Contact name:</mat-label>
+      <input matInput type="text" name="contactTypeDescription" [(ngModel)]="contactType.contactTypeDescription" #contactTypeDescription="ngModel" required>
+      @if(contactTypeDescription.hasError("required") && contactTypeDescription.touched) {
+        <mat-error>Please specify contact type!</mat-error>
+      }
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel!</button>
+    <button mat-button (click)="save()" [disabled]="form.invalid">{{heading}}</button>
+  </mat-dialog-actions>
+</form>

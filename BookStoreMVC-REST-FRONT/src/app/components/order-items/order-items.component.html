@@ -1,0 +1,19 @@
+<table>
+  <tr>
+    <th>Book</th>
+    <th>Price</th>
+    <th>Comment</th>
+    <th>Amount</th>
+    <th colspan="2">Edit</th>
+  </tr>
+  @for (item of order?.itemList; track $index){
+    <tr>
+      <td><a [routerLink]="'/books/'+item.book?.id">{{item.book?.title}}</a></td>
+      <td>{{item.itemAgreedPrice}}</td>
+      <td>{{item.itemComment}}</td>
+      <td>{{item.amount}}</td>
+      <td class="action-cell edit-table-button"><button (click)="editOrderItem(item)">Edit!</button></td>
+      <td class="action-cell delete-table-button"><button (click)="deleteOrderItem(item)">Delete!</button></td>
+    </tr>
+  }
+</table>

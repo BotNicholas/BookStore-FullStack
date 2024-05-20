@@ -1,0 +1,45 @@
+<div class="content">
+  <h1>Available Books:</h1>
+  <button class="add-button" (click)="addNewBook()">Add book</button>
+  <table >
+    <tr>
+      <th class="book-image-header"></th>
+<!--      <th>Id</th>-->
+      <th>Author</th>
+      <th>Category</th>
+      <th>ISBN</th>
+      <th>Publication Date</th>
+      <th>Acquirement Date</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Comments</th>
+      <th colspan="2">Edit</th>
+    </tr>
+    @for (book of books; track $index){
+<!--      <tr (mouseover)="el.style.display='block'" (mouseout)="el.style.display='none'">-->
+      <tr (mouseover)="el.style.opacity='1'" (mouseout)="el.style.opacity='0'">
+        <td class="book-image-cell">
+<!--          <a [routerLink]="'/books/'+book.id">-->
+            <img class="book-image" #el  [src]="url+booksImagesPath+book.image">
+<!--          </a>-->
+        </td>
+
+        <!--      <td>{{book.id}}</td>-->
+      <td> <a [routerLink]="'/books/'+book.id">{{book.title}}</a></td>
+      <td>{{book.isbn}}</td>
+      <td><a [routerLink]="'/authors/'+book.author?.id">{{book.author?.firstname}} {{book.author?.lastname}}</a></td>
+      <!--        <td><a [routerLink]="'/authors?filter=author-'+book.author.id">{{book.category.categoryDescription}}</a></td>-->
+      <!--        <td><a routerLink="/authors" [queryParams]="{filter: 'author-'+book.author.id}">{{book.author.firstname}} {{book.author.lastname}}</a></td>-->
+      <!--        <td><a routerLink="/categories" [queryParams]="{filter: 'category-'+book.category.code}">{{book.category.categoryDescription}}</a></td>-->
+      <td><a [routerLink]="'/categories/'+book.category?.code">{{book.category?.categoryDescription}}</a></td>
+      <td>{{book.recommendedPrice | currency:"MDL":"symbol":"1.2-2"}}</td>
+      <td>{{book.publicationDate}}</td>
+      <td>{{book.dateAcquired}}</td>
+        <td>{{book.comments}}</td>
+        <td class="action-cell edit-table-button"><button (click)="editBook(book)">Edit!</button></td>
+        <td class="action-cell delete-table-button"><button (click)="deleteBook(book)">Delete!</button></td>
+      </tr>
+
+    }
+  </table>
+</div>

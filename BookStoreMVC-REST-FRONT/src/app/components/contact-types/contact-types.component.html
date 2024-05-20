@@ -1,0 +1,19 @@
+<div class="content">
+  <h1>Available contact types:</h1>
+  <button class="add-button" (click)="addNewContactType()">Add contact type</button>
+  <table >
+    <tr>
+      <!--      <th>Code</th>-->
+      <th>Contact:</th>
+      <th colspan="2">Edit</th>
+    </tr>
+    @for(ct of contactTypes; track $index) {
+      <tr>
+        <!--        <td>{{ct.code}}</td>-->
+        <td><a routerLink="/contacts" [queryParams]="{filter: 'type-'+ct.code}">{{ct.contactTypeDescription}}</a></td>
+        <td class="action-cell edit-table-button"><button (click)="editContactType(ct)">Edit!</button></td>
+        <td class="action-cell delete-table-button"><button (click)="deleteContactType(ct)">Delete!</button></td>
+      </tr>
+    }
+  </table>
+</div>

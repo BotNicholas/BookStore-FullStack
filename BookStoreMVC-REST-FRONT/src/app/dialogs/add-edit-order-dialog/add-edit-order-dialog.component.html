@@ -1,0 +1,33 @@
+<form class="dialog-content" #form="ngForm">
+  <h2 mat-dialog-title>{{heading}} order:</h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Order date and Time: </mat-label>
+      <input matInput type="datetime-local" name="orderDate" [(ngModel)]="order.orderDate" #orderDate="ngModel" required>
+
+      @if (orderDate.hasError("required") && orderDate.touched) {
+        <mat-error>Please specify order date!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Costumer: </mat-label>
+      <mat-select name="costumer" [(ngModel)]="order.costumer" #costumer="ngModel" [compareWith]="compareCostumers" required>
+        @for(costumer of allCostumers; track $index){
+          <mat-option [value]="costumer"><div style="text-align: center">{{costumer.name}}<br>({{costumer.idnp}})</div></mat-option>
+        }
+      </mat-select>
+
+      @if (costumer.hasError("required") && costumer.touched) {
+        <mat-error>Please select costumer!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button [disabled]="!form.valid" (click)="save()">{{heading}}</button>
+  </mat-dialog-actions>
+</form>

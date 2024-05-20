@@ -1,0 +1,19 @@
+<div class="content">
+  <h1>Available books categories:</h1>
+  <button class="add-button" (click)="addNewCategory()">Add category</button>
+  <table >
+    <tr>
+<!--      <th>Code</th>-->
+      <th>Category name</th>
+      <th colspan="2">Edit</th>
+    </tr>
+    @for(cat of categories; track $index) {
+      <tr>
+<!--        <td>{{cat.code}}</td>-->
+        <td><a routerLink="/books" [queryParams]="{filter: 'category-'+cat.code}">{{cat.categoryDescription}}</a></td>
+        <td class="action-cell edit-table-button"><button (click)="editCategory(cat)">Edit!</button></td>
+        <td class="action-cell delete-table-button"><button (click)="deleteCategory(cat)">Delete!</button></td>
+      </tr>
+    }
+  </table>
+</div>

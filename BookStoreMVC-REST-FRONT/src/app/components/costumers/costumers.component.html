@@ -1,0 +1,33 @@
+<div class="content">
+  <h1>All the costumers:</h1>
+<!--  <button class="add-button" (click)="addNewCostumer()">Add costumer</button>-->
+<!--  Are added automatically with users-->
+<!--  todo: add new costumer with deletion on back-->
+  <table >
+    <tr>
+      <!--      <th>Id</th>-->
+      <th>IDNP</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th colspan="2">Edit</th>
+    </tr>
+
+
+    @for(costumer of costumers; track $index) {
+      <tr>
+        <td>{{costumer.idnp}}</td>
+        <td>{{costumer.name}}</td>
+        <td>{{costumer.address}}</td>
+        <td>{{costumer.phone}}</td>
+        <td>{{costumer.email}}</td>
+        <td class="action-cell edit-table-button"><button (click)="editCostumer(costumer)">Edit!</button></td>
+<!--        <td class="action-cell delete-table-button"><button (click)="deleteCostumer(costumer)">Delete!</button></td>-->
+      </tr>
+    }
+  </table>
+</div>
+
+
+<!--todo: specify that we can not add or delete customer because it is related with users in ./README.MD!!!-->

@@ -1,0 +1,15 @@
+<h3 mat-dialog-title>{{book.title}}</h3>
+<img [src]="url+booksImagesPath+book.image">
+<div class="content">
+  <h4><b>Author: </b><a [routerLink]="'/authors/' + book.author?.id" (click)="closeAll()">{{book.author?.firstname}} {{book.author?.lastname}}</a></h4>
+  <h4><b>Category: </b>{{book.category?.categoryDescription}}</h4>
+  <h4><b>ISBN: </b>{{book.isbn}}</h4>
+  <h4><b>Date published: </b>{{book.publicationDate | date:"dd-MM-yyyy"}}</h4>
+  <h4><b>Date acquired: </b>{{book.dateAcquired  | date:"dd-MM-yyyy"}}</h4>
+  <h4><b>Price: </b>{{book.recommendedPrice}}</h4>
+  <h4><b>Comments: </b></h4>
+  <textarea class="comments" readonly>{{book.comments}}</textarea>
+</div>
+<mat-dialog-actions>
+  <button mat-button style="background-color: rgba(128,128,128,0.5)" (click)="close()">Close</button>
+</mat-dialog-actions>

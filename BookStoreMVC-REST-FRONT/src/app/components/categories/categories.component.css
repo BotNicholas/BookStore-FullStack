@@ -1,0 +1,10 @@
+table {
+  width: 50%;
+  align-self: center;
+  text-align: center;
+}
+
+.add-button {
+  margin-top: 35px;
+  margin-right: 25%;
+}

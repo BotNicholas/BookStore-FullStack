@@ -1,0 +1,27 @@
+<div class="content">
+  <h1>Available contacts:</h1>
+  <button class="add-button" (click)="addNewContact()">Add contact</button>
+  <table >
+    <tr>
+      <th>Contact type:</th>
+      <th>Firstname:</th>
+      <th>Lastname:</th>
+      <th>Work phone:</th>
+      <th>Cell phone:</th>
+      <th>Other details:</th>
+      <th colspan="2">Edit</th>
+    </tr>
+    @for(contact of contacts; track $index) {
+      <tr>
+        <td><a [routerLink]="'/contact-types/'+contact.contactType?.code">{{contact.contactType?.contactTypeDescription}}</a></td>
+        <td>{{contact.firstname}}</td>
+        <td>{{contact.lastname}}</td>
+        <td>{{contact.workPhone}}</td>
+        <td>{{contact.cellPhone}}</td>
+        <td>{{contact.otherDetails}}</td>
+        <td class="action-cell edit-table-button"><button (click)="editContact(contact)">Edit!</button></td>
+        <td class="action-cell delete-table-button"><button (click)="deleteContact(contact)">Delete!</button></td>
+      </tr>
+    }
+  </table>
+</div>

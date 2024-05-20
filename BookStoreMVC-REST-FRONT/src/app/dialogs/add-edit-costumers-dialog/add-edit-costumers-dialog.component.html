@@ -1,0 +1,59 @@
+<form class="dialog-content" #form="ngForm">
+  <h2 mat-dialog-title>{{heading}} costumer:</h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>IDNP:</mat-label>
+      <input matInput name="idnp" type="text" [(ngModel)]="costumer.idnp" #idnp="ngModel" required pattern="\d{13}">
+      @if(idnp.hasError("required") && idnp.touched){
+        <mat-error>Please specify the IDNP!</mat-error>
+      } @else if(idnp.hasError("pattern") && idnp.touched){
+        <mat-error>Format: XXXXXXXXXXXXX!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Name:</mat-label>
+      <input matInput name="name" type="text" [(ngModel)]="costumer.name" #name="ngModel" required>
+      @if(name.hasError("required") && name.touched){
+        <mat-error>Please specify name!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Address:</mat-label>
+      <input matInput name="address" type="text" [(ngModel)]="costumer.address" #address="ngModel" required>
+      @if(address.hasError("required") && address.touched){
+        <mat-error>Please specify address!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Phone:</mat-label>
+      <input matInput name="phone" type="text" [(ngModel)]="costumer.phone" #phone="ngModel" required pattern="\+373\d{8}">
+      @if(phone.hasError("required") && phone.touched){
+        <mat-error>Please specify the phone!</mat-error>
+      } @else if(phone.hasError("pattern") && phone.touched){
+        <mat-error>Format: +373xxxxxxxx!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Email:</mat-label>
+      <input matInput name="email" type="text" [(ngModel)]="costumer.email" #email="ngModel" required pattern=".+\@.+\.com">
+      @if(email.hasError("required") && email.touched){
+        <mat-error>Please specify email!</mat-error>
+      } @else if(email.hasError("pattern") && email.touched){
+        <mat-error>Format: example&#64;mail.com!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button (click)="save()" [disabled]="form.invalid">{{heading}}</button>
+  </mat-dialog-actions>
+</form>

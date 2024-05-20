@@ -1,0 +1,49 @@
+
+.book-image {
+  width: 100px;
+  height: 150px;
+  /*display: none;*/
+  opacity: 0;
+  position: absolute;
+  transition: all 200ms;
+  /*margin-top: 17px;*/
+  top: 135px;
+  left: 20px;
+  box-shadow: 0px 0px 10px white;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  margin-left: auto;
+  transition: all 200ms;
+}
+
+table:hover {
+  width: 90%;
+}
+
+/*.book-image:hover{*/
+/*  transform: scale(1.5);*/
+/*}*/
+
+th:nth-child(2){
+  border-top-left-radius: 10px;
+}
+
+tr:nth-last-child(1) td:nth-child(2) {
+  border-bottom-left-radius: 10px;
+}
+
+.book-image-header {
+  background-color: transparent;
+  border: none;
+}
+.book-image-cell {
+  background-color: transparent;
+  border: none;
+}
+
+.add-button {
+  margin-top: 35px;
+}

@@ -1,0 +1,26 @@
+img {
+  width: 325px;
+  height: 500px;
+  margin: 0 10px;
+}
+
+.content {
+  padding-left: 10px;
+}
+
+.content h4{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: normal;
+}
+
+.comments {
+  resize: none;
+  border-radius: 10px;
+  outline: none;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+}

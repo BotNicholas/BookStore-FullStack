@@ -1,0 +1,36 @@
+  <div class="container">
+    <div class="header">
+      <h1 (click)="goHome()">BookStore</h1>
+      <div class="nav-buttons">
+        <a class="nav-link" routerLink="/books">Books</a>
+        <a class="nav-link" routerLink="/authors">Authors</a>
+        <a class="nav-link" routerLink="/categories">Categories</a>
+        <a class="nav-link" routerLink="/contacts">Contacts</a>
+        <a class="nav-link" routerLink="/contact-types">Contact types</a>
+        <a class="nav-link" routerLink="/costumers">Costumers</a>
+        <a class="nav-link" [hidden]="false" routerLink="/orders">Orders</a>
+<!--        <a class="nav-link" routerLink="/order-items">Order items</a>-->
+        <a class="nav-link" routerLink="/users">Users</a>
+      </div>
+      <div class="me-button" (click)="goToMe()">Me</div>
+    </div>
+    <div class="body">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="footer">
+<!--      <div>-->
+<!--        <h3>Project info:</h3>-->
+<!--        <p>This is alpha version of the project, so a lot may work not as good, as has been expected ;-)-->
+<!--         <br>Back is created on Spring Boot 3 && Front is created on Angular 17</p>-->
+<!--      </div>-->
+      <div>
+<!--        <h3>Contacts:</h3>-->
+<!--        You can find me on:-->
+        <a target="_blank" href="https://github.com/BotNicholas">GitHub</a> | <a target="_blank" href="https://t.me/BotNicholas">Telegram</a>
+<!--        or you can <a href="mailto:botannicolai22@gmail.com">Mail me</a> or even <a href="tel:+37369982418">Call me)</a>-->
+      </div>
+      <div>
+        <br><i>All rights reserved <sup>©</sup></i>
+      </div>
+    </div>
+  </div>

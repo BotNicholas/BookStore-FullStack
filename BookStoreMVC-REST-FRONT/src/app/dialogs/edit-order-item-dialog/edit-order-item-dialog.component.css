@@ -1,0 +1,10 @@
+.select-book-icon {
+  width: 40px;
+  height: 60px;
+  border-radius: 0;
+  position: relative;
+}
+
+/*.select-book-icon:hover {*/
+/*  transform: scale(1.5);*/
+/*}*/

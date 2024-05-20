@@ -1,0 +1,103 @@
+<form class="dialog-content" #form="ngForm">
+  <h2 mat-dialog-title>{{heading}} book:</h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Author:</mat-label>
+      <mat-select name="author" [(ngModel)]="book.author" [compareWith]="compareAuthors" #authorModel="ngModel" required>
+        @for(author of allAuthors; track $index) {
+          <mat-option [value]="author">
+            <div class="select-option-with-icon">
+              <img [src]="url+authorsImagesPath+author.image" [alt]="author.image">
+              <div>{{author.firstname}} {{author.lastname}}</div>
+            </div>
+          </mat-option>
+        }
+      </mat-select>
+      @if(authorModel.hasError("required") && authorModel.touched) {
+        <mat-error>Please select an author!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Category:</mat-label>
+      <mat-select name="category" [(ngModel)]="book.category" [compareWith]="compareCategories" #category="ngModel" required>
+        @for(category of allCategories; track $index) {
+          <mat-option [value]="category">{{category.categoryDescription}}</mat-option>
+<!--          todo: or [value]="category.code"-->
+        }
+      </mat-select>
+      @if(category.hasError("required") && category.touched) {
+        <mat-error>Please select book category!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>ISBN:</mat-label>
+      <input name="isbn" type="text" matInput [(ngModel)]="book.isbn" #isbn="ngModel" required pattern="\d{3}-\d-\d{2}-\d{6}-\d">
+      @if(isbn.hasError("required") && isbn.touched) {
+        <mat-error>Please specify isbn!</mat-error>
+      } @else if(isbn.hasError("pattern") && isbn.touched) {
+        <mat-error>Format: XXX-X-XX-XXXXXX-X!</mat-error><br><br>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Publication date: </mat-label>
+      <input type="date" matInput name="publicationDate" [(ngModel)]="book.publicationDate" #publication="ngModel" required>
+
+      @if(publication.hasError("required") && publication.touched) {
+        <mat-error>Please specify publication date!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Acquirement date: </mat-label>
+      <input type="date" matInput name="acquirementDate" [(ngModel)]="book.dateAcquired" #acquirement="ngModel" required>
+      @if(acquirement.hasError("required") && publication.touched) {
+        <mat-error>Please specify acquirement date!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Title:</mat-label>
+      <input type="text" name="title" matInput [(ngModel)]="book.title" #title="ngModel" required>
+      @if(title.hasError("required") && title.touched) {
+        <mat-error>Please specify the title!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Price:</mat-label>
+      <input type="number" name="price" min="1" value="1" step="0.1" matInput [(ngModel)]="book.recommendedPrice" #price=ngModel required>
+      @if(price.hasError("required") && price.touched) {
+        <mat-error>Please specify the price!</mat-error>
+      } @else if(price.hasError("min") && price.touched) {
+        <mat-error>Price must be > 0!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Comments:</mat-label>
+      <textarea matInput cdkTextareaAutosize name="comments" [(ngModel)]="book.comments"></textarea>
+    </mat-form-field>
+    <br>
+
+    <mat-label>Select photo:</mat-label><br>
+    <input type="file" name="photo" accept="image/*" ngModel #photo="ngModel" (change)="onFileUploaded($event, photo)">
+    @if(photo.hasError("fileSize") && photo.touched) {
+      <mat-error>File size must not be more than {{maxUploadFileSize}} Bytes. <br>Current file size: {{uploadedFileSize}}</mat-error>
+    }
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button [disabled]="!form.valid" (click)="save()">{{heading}}</button>
+  </mat-dialog-actions>
+</form>

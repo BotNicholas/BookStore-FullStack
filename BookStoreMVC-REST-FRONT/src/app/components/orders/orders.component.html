@@ -1,0 +1,44 @@
+<div class="content">
+  <h1>All the orders:</h1>
+  <button class="add-button" (click)="addNewOrder()">Add order</button>
+  <table>
+    <tr>
+      <th>Order Date</th>
+      <th>Order Value</th>
+      <th>Costumer</th>
+      <th>Order items</th>
+      <th colspan="2">Edit</th>
+    </tr>
+
+
+    @for(order of orders; track $index) {
+      <tr>
+        <td>{{order.orderDate | date:"dd-MM-yyyy HH:mm:ss"}}</td>
+        <td>{{order.orderValue | number:"1.2-2"}}</td>
+        @if(order.costumer) {
+          <td><a [routerLink]="'/costumers/'+order.costumer.id">{{order.costumer.name}}</a></td>
+        } @else {
+          <td>UNKNOWN</td>
+        }
+
+        <td><button (click)="showItems(items)">{{window.getComputedStyle(items).display == 'none' ? 'Show' : 'Hide'}} items</button></td>
+        <td class="action-cell edit-table-button"><button (click)="editOrder(order)">Edit!</button></td>
+        <td class="action-cell delete-table-button"><button (click)="deleteOrder(order)">Delete!</button></td>
+      </tr>
+      <tr>
+        <td #items class="order-item-cell" colspan="6">
+          <div>
+            @if (order.itemList.length>0){
+              <order-items [order]="order" (orderItemUpdated)="updateOrder($event)" ></order-items>
+            } @else {
+              <h2>EMPTY!</h2>
+            }
+            <button class="add-button order-item-add-button" (click)="addNewOrderItemFor(order)">Add item</button>
+          </div>
+        </td>
+      </tr>
+    }
+  </table>
+</div>
+
+

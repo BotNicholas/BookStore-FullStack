@@ -1,0 +1,47 @@
+.order-item-cell div{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 5px 20px;
+}
+
+.order-item-cell {
+  background-color: rgba(27, 27, 53, 0.8);
+  transition: all 200ms;
+  display: none;
+}
+
+.order-item-cell-open {
+  animation-name: item-open;
+  animation-duration: 1000ms;
+}
+
+.order-item-cell-close {
+  animation-name: item-close;
+  animation-duration: 800ms;
+}
+
+@keyframes item-open {
+  0% {opacity: 0; display: none}
+  100% {opacity: 1; display: table-cell}
+}
+@keyframes item-close {
+  0% {opacity: 1; display: table-cell}
+  100% {opacity: 0; display: none}
+}
+
+.add-button {
+  margin-top: 35px;
+}
+
+.order-item-add-button{
+  margin: 10px 5% 0 0;
+  position: relative;
+
+}
+
+
+order-items {
+  width: 90%;
+}

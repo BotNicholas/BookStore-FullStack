@@ -1,0 +1,26 @@
+<div class="content">
+  <h1>Costumer:</h1>
+  <table>
+    <tr>
+      <!--      <th>Id</th>-->
+      <th>IDNP</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th colspan="2">Edit</th>
+    </tr>
+
+      <tr>
+        <td>{{costumer?.idnp}}</td>
+        <td>{{costumer?.name}}</td>
+        <td>{{costumer?.address}}</td>
+        <td>{{costumer?.phone}}</td>
+        <td>{{costumer?.email}}</td>
+        <td class="action-cell edit-table-button"><button (click)="showTouchedCostumer()">Edit!</button></td>
+        <td class="action-cell delete-table-button"><button (click)="showTouchedCostumer()">Delete!</button></td>
+      </tr>
+  </table>
+</div>
+
+

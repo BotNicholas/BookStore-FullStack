@@ -1,0 +1,49 @@
+<div class="body">
+  <p>It's you!!!</p>
+  <table>
+    <tr>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+    <tr>
+      <td>data 1</td>
+      <td>data 2</td>
+      <td><button (click)="increment()">{{x==2 ? "show" : "hide"}}</button></td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table [hidden]="x==2 ? false : true">
+          <tr>
+            <th>1</th>
+            <th>2</th>
+          </tr>
+          <tr>
+            <td>data 1</td>
+            <td>data 2</td>
+          </tr>
+        </table>
+    <tr>
+      <td>data 1</td>
+      <td>data 2</td>
+      <td><button (click)="increment()">{{x==3 ? "show" : "hide"}}</button></td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table [hidden]="x==3 ? false : true">
+          <tr>
+            <th>1</th>
+            <th>2</th>
+          </tr>
+          <tr>
+            <td>data 1</td>
+            <td>data 2</td>
+          </tr>
+        </table>
+      </td>
+
+    </tr>
+  </table>
+  <button (click)="goHome()">Go home!</button>
+
+</div>

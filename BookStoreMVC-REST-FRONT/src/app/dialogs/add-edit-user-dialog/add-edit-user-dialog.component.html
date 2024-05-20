@@ -1,0 +1,47 @@
+<form class="dialog-content" #form="ngForm">
+  <h2 mat-dialog-title>{{heading}} user:</h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Username: </mat-label>
+<!--      <input type="text" matInput name="username" [(ngModel)]="user.username" #username="ngModel" (change)="checkUsernameAvailability(username)" required>-->
+      <input type="text" matInput name="username" [(ngModel)]="user.username" #username="ngModel" (ngModelChange)="checkUsernameAvailability(username)" required>
+      @if(username.hasError("required") && username.touched) {
+        <mat-error>Please specify username!</mat-error>
+      } @else if(username.hasError("userUsername") && username.touched) {
+      <mat-error>This username can not be used!</mat-error>
+    }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field [style.margin-bottom]="(password.touched && password.hasError('pattern')) ? '70px' : '0px'">
+      <mat-label>Password: </mat-label>
+      <input type="password" matInput name="password" ngModel #password="ngModel" [required]="newUser" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$\%^&*\_-]).{8,}$">
+      @if (password.hasError("required") && password.touched) {
+        <mat-error>Please specify the password!</mat-error>
+      } @else if (password.hasError("pattern") && password.touched) {
+        <mat-error>Uppercase and lowercase English letters, digits and at least one special character are required!</mat-error><br>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Role:</mat-label>
+      <mat-select name="role" [(ngModel)]="user.roles" required>
+        <mat-option value="ROLE_ADMIN">ADMIN</mat-option>
+        <mat-option value="ROLE_MANAGER">MANAGER</mat-option>
+        <mat-option value="ROLE_USER">USER</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+
+    <mat-label>Photo:</mat-label><br>
+    <input type="file" accept="image/*" name="photo" ngModel #photo="ngModel" (change)="onFileUploaded($event, photo)">
+    @if(photo.touched && photo.hasError("fileSize")){
+      <mat-error>File size must not be more than {{maxFileUploadSize}} Bytes. <br> Current file size: {{uploadedFileSize}} Bytes</mat-error>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button [disabled]="!form.valid" (click)="save()">{{heading}}</button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,9 @@
+.body{
+  background-color: rgba(45, 45, 58, 0.98);
+  height: 100%;
+  color: white;
+}
+
+p {
+  margin: 0;
+}

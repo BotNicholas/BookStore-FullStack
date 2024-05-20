@@ -1,0 +1,14 @@
+<div class="content">
+  <h1>Category:</h1>
+  <table >
+    <tr>
+      <th>Category name</th>
+      <th colspan="2">Edit</th>
+    </tr>
+      <tr>
+        <td><a routerLink="/books" [queryParams]="{filter: 'category-'+category?.code}">{{category?.categoryDescription}}</a></td>
+        <td class="action-cell edit-table-button"><button (click)="showTouchedCategory()">Edit!</button></td>
+        <td class="action-cell delete-table-button"><button (click)="showTouchedCategory()">Delete!</button></td>
+      </tr>
+  </table>
+</div>

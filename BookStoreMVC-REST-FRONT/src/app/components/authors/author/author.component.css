@@ -1,0 +1,21 @@
+.content {
+  display: flex;
+  justify-content: center;
+}
+
+.author-info {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.table-icon{
+  width: 100px;
+  height: 100px;
+  transition: all 200ms;
+}
+
+.table-icon:hover{
+  transform: scale(3) translate(20px, 15px);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px white;
+}

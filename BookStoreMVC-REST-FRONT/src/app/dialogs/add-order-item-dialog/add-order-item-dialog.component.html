@@ -1,0 +1,34 @@
+<form #form=ngForm>
+  <h2 mat-dialog-title>Select books:</h2>
+  <div class="dialog-content">
+    <div class="books">
+      @for(book of allBooks; track $index){
+        <div class="book">
+          <input type="checkbox" style="display: none">
+          <img [ngClass]="{'selected-sign-enabled': book[1]}" class="selected-sign" src="assets/selected.png">
+          <img [ngClass]="{'selected': book[1]}" [src]="url+booksImagesPath+book[0].image" (click)="selectBook(book)">
+          <h3 [ngClass]="{'selected-title': book[1]}" style="text-align: center" class="book-title" (click)="showInfo(book[0])">{{book[0].title}}</h3>
+
+          <div [ngClass]="{'amount-enabled': book[1]}" class="amount">
+            <mat-form-field>
+              <mat-label>Amount:</mat-label>
+              <input type="number" ngModel #amountModel="ngModel" [name]="'book'+book[0].id+'Amount'" matInput  min="1" step="1" value="1" (change)="setAmount($event, book[0])">
+
+              @if (amountModel.hasError("min") && amountModel.touched) {
+                <mat-error>Minimal 1 book is allowed!</mat-error>
+              }
+            </mat-form-field>
+
+
+          </div>
+        </div>
+      }
+    </div>
+    <div class="navigation">
+      <mat-dialog-actions>
+        <button mat-button (click)="close()">Cancel</button>
+        <button mat-button style="background-color: rgba(128,128,128,0.5)" [disabled]="!selected || form.invalid" (click)="save()">Add</button>
+      </mat-dialog-actions>
+    </div>
+  </div>
+</form>

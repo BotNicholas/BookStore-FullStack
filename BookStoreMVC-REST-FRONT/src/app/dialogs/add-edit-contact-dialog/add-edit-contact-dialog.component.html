@@ -1,0 +1,65 @@
+<form class="dialog-content" #form="ngForm">
+  <h2 mat-dialog-title>{{heading}} contact:</h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Contact type:</mat-label>
+      <mat-select name="contactType" [(ngModel)]="contact.contactType" [compareWith]="compareContactTypes" #contactType="ngModel" required>
+        @for(contactType of allContactTypes; track $index) {
+          <mat-option [value]="contactType">{{contactType.contactTypeDescription}}</mat-option>
+        }
+      </mat-select>
+      @if(contactType.hasError("required") && contactType.touched) {
+        <mat-error>Please specify contact type!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Firstname:</mat-label>
+      <input matInput name="firstname" type="text" [(ngModel)]="contact.firstname" #firstname="ngModel" required>
+      @if(firstname.hasError("required") && firstname.touched){
+        <mat-error>Please specify firstname!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Lastname:</mat-label>
+      <input matInput name="lastname" type="text" [(ngModel)]="contact.lastname" #lastname="ngModel" required>
+      @if(lastname.hasError("required") && lastname.touched){
+        <mat-error>Please specify lastname!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Work phone:</mat-label>
+      <input matInput name="workPhone" type="text" [(ngModel)]="contact.workPhone" #workPhone="ngModel" required pattern="\+373\d{8}">
+      @if(workPhone.hasError("required") && workPhone.touched){
+        <mat-error>Please specify work phone!</mat-error>
+      } @else if(workPhone.hasError("pattern") && workPhone.touched){
+        <mat-error>Format: +373xxxxxxxx!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Cell phone:</mat-label>
+      <input matInput name="cellPhone" type="text" [(ngModel)]="contact.cellPhone" #cellPhone="ngModel" required pattern="\+373\d{8}">
+      @if(cellPhone.hasError("required") && cellPhone.touched){
+        <mat-error>Please specify cell phone!</mat-error>
+      } @else if(cellPhone.hasError("pattern") && cellPhone.touched){
+        <mat-error>Format: +373xxxxxxxx!</mat-error>
+      }
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Other details:</mat-label>
+      <textarea matInput cdkTextareaAutosize name="otherDetails" [(ngModel)]="contact.otherDetails"></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button (click)="save()" [disabled]="form.invalid">{{heading}}</button>
+  </mat-dialog-actions>
+</form>
