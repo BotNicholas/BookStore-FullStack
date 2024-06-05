@@ -110,20 +110,40 @@ public class BookController {
 //        return "Success!";
 //    }
 
-    @PostMapping
+    //    Важно!!!
+//  @RequestParam используется для извлечекния параметров из строки запроса или из формы данных и используется для извлечения простых данных.
+//    НЕ ПОДДЕРЖИВАЕТ АВТОМАТИЧЕСКУЮ ДЕСЕРИАЛИЗАЦИЮ!!!
+
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public BookDTO save(@RequestParam(name = "photo", required = false) MultipartFile photo, @RequestParam(name = "book") String json) throws IOException, UnexpectedIdException {
+//        BookDTO bookDTO = objectMapper.readValue(json, BookDTO.class);
+//
+//        if (bookDTO.getId() != null && bookDTO.getId() != 0) {
+//            throw new UnexpectedIdException();
+//        }
+//
+//        Set<ConstraintViolation<BookDTO>> violations = validator.validate(bookDTO);
+//        if (!violations.isEmpty()) {
+//            throw new ConstraintViolationException(violations);
+//        }
+//
+//
+//        if (photo != null) {
+//            return this.bookService.saveWithPhoto(bookDTO, photo);
+//        }
+//        return this.bookService.save(bookDTO);
+//    }
+
+
+    //    @RequestPart был разработан специально для извлечения данных из формы данных (multipart/form-data) и автоматически десериализовывал их
+    @PostMapping()
     @ResponseStatus(HttpStatus.OK)
-    public BookDTO save(@RequestParam(name = "photo", required = false)MultipartFile photo, @RequestParam(name = "book") String json) throws IOException, UnexpectedIdException {
-        BookDTO bookDTO = objectMapper.readValue(json, BookDTO.class);
+    public BookDTO save(@RequestPart(name = "photo", required = false) MultipartFile photo, @Valid @RequestPart(name = "book") BookDTO bookDTO) throws IOException, UnexpectedIdException {
 
         if (bookDTO.getId() != null && bookDTO.getId() != 0) {
             throw new UnexpectedIdException();
         }
-
-        Set<ConstraintViolation<BookDTO>> violations = validator.validate(bookDTO);
-        if (!violations.isEmpty()) {
-            throw new ConstraintViolationException(violations);
-        }
-
 
         if (photo != null) {
             return this.bookService.saveWithPhoto(bookDTO, photo);
